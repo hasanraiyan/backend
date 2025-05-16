@@ -1,15 +1,16 @@
 
 
 import generateToken from "../utils/jwtUtils.js";
+import { User } from "../models/User.model.js";
 
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
     try {
-        const userExists = await user.findOne({ email });
+        const userExists = await User.findOne({ email });
         if (userExists) {
             return res.status(400).json({ message: "User already exists" });
         }
-        const user = await user.create({ name, email, password });
+        const user = await User.create({ name, email, password });
 
         res.status(201).json({
             _id: user._id,
